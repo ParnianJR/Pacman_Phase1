@@ -47,19 +47,21 @@ int main(){
 	while(1){
 		int choice;
 		gotoxy(pacman.x,pacman.y);
+		 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY);
 		printf("%c",'S');
         BellMan(pacman,Map,Path);
 		choice=GPS(Path,pacman);
 		Sleep(500);
 		gotoxy(pacman.x,pacman.y);
+		  SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),0);
 		printf(" ");
-
 		if(choice)
 			Move(choice,&pacman,Map,Path);
 		else
 			break;
 	}
 	gotoxy(0,11);
+	 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_GREEN);
 	printf("FINISH:)");
 }
 void drawMap(int Map[COL][R]){
