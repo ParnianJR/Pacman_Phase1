@@ -146,8 +146,8 @@ void BellMan(coord pacman,int Map[COL][R],int Path[COL][R]){
                     if (i!=pacman.y || j!=pacman.x){
 					a=((i>0) ? dist[i-1][j]:INFINIT);
 					b=((j>0) ? dist[i][j-1]:INFINIT);
-					c=((i<3) ? dist[i+1][j]:INFINIT);
-					d=((j<3) ? dist[i][j+1]:INFINIT);
+					c=((i<COL-1) ? dist[i+1][j]:INFINIT);
+					d=((j<R-1) ? dist[i][j+1]:INFINIT);
 					dist[i][j]=Min(a,b,c,d)+1;
 				}
 				if(prev!=dist[i][j])
@@ -170,11 +170,11 @@ void BellMan(coord pacman,int Map[COL][R],int Path[COL][R]){
 					Path[n][m-1]=1;
 					m=m-1;
 				}
-				else if(n<3&&dist[n+1][m]<dist[n][m]){
+				else if(n<COL-1&&dist[n+1][m]<dist[n][m]){
 					Path[n+1][m]=1;
 					n=n+1;
 				}
-				else if(m<3&&dist[n][m+1]<dist[n][m]){
+				else if(m<R-1&&dist[n][m+1]<dist[n][m]){
 					Path[n][m+1]=1;
 					m=m+1;
 				}
@@ -187,9 +187,9 @@ void BellMan(coord pacman,int Map[COL][R],int Path[COL][R]){
 int GPS(int Path[COL][R],coord pacman){
 	int i=pacman.y;
 	int j=pacman.x;
-	if(i<3&&Path[i+1][j]==1) return 2;
+	if(i<COL-1&&Path[i+1][j]==1) return 2;
 	if(i>0&&Path[i-1][j]==1) return 1;
-	if(j<3&&Path[i][j+1]==1) return 4;
+	if(j<R-1&&Path[i][j+1]==1) return 4;
 	if(j>0&&Path[i][j-1]==1) return 3;
 		return 0;
 }
