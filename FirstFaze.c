@@ -22,7 +22,7 @@ int GPS(int Path[COL][R],coord);
 int main(){
 	int i,j;
 	char c;
-	coord pacman={0,0};
+	coord pacman;
 	int Map[COL][R];
 	FILE *ptf1=fopen("C:\\LastProject\\Matrix1.txt","r");
 	if(ptf1!=NULL){
@@ -36,12 +36,14 @@ int main(){
 		}
 	}
 	fclose(ptf1);
-/*	int Map[COL][R]={
-             1,3,0,3,
-			 3,3,3,2,
-			 3,3,3,0,
-			 3,3,3,2
-	};*/
+	for(i=0;i<COL;i++){
+		for(j=0;j<R;j++){
+			if(Map[i][j]==1){
+				pacman.x=j;
+				pacman.y=i;
+			}
+		}
+	}
 	static int Path[COL][R]={0};
 	drawMap(Map);
 	while(1){
@@ -79,6 +81,9 @@ void drawMap(int Map[COL][R]){
 				case 3:
 					block=' ';
 					break;
+			}
+		/*	if(block=='*') {
+				 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_INTENSITY|BACKGROUND_RED);*/
 			}
 			printf("%c",block);
 		}
