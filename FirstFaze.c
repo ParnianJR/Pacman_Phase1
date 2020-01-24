@@ -4,10 +4,10 @@
 #include <windows.h>
 #define COL 4
 #define R 4
-#define INFINIT 20
+#define INFINIT 1000
 // 1 S pacman
-// 2 . food
-// 0 * block
+// 2   food
+// 0  block
 // 3   empty
 typedef struct{
 	int x;
@@ -50,7 +50,7 @@ int main(){
 		int choice;
 		gotoxy(pacman.x,pacman.y);
 		 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_BLUE|BACKGROUND_RED|BACKGROUND_INTENSITY);
-		printf("%c",'S');
+		printf("%c",016);
         BellMan(pacman,Map,Path);
 		choice=GPS(Path,pacman);
 		Sleep(500);
@@ -73,10 +73,10 @@ void drawMap(int Map[COL][R]){
 		for(b=0;b<R;b++){
 			switch(Map [a][b]){
 				case 0:
-					block='*';
+					block=178;
 					break;
 				case 2:
-					block='.';
+					block=248;
 					break;
 				case 3:
 					block=' ';
