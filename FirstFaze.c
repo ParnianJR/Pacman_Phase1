@@ -83,8 +83,8 @@ void drawMap(int Map[COL][R]){
 					break;
 			}
 		/*	if(block=='*') {
-				 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_INTENSITY|BACKGROUND_RED);*/
-			}
+				 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_INTENSITY|BACKGROUND_RED);
+			}*/
 			printf("%c",block);
 		}
 		printf("\n");
