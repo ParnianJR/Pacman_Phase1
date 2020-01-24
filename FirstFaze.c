@@ -2,13 +2,14 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-#define COL 4
-#define R 4
+#define COL 6
+#define R 6
 #define INFINIT 1000
 // 1 S pacman
 // 2   food
 // 0  block
 // 3   empty
+// 5   wall
 typedef struct{
 	int x;
 	int y;
@@ -23,12 +24,12 @@ int main(){
 	int i,j;
 	char c;
 	coord pacman;
-	int Map[COL][R];
+	int Map[COL][R]={0};
 	FILE *ptf1=fopen("C:\\LastProject\\Matrix1.txt","r");
 	if(ptf1!=NULL){
 		while(feof(ptf1)==0){
-		for(i=0;i<COL;i++){
-			for(j=0;j<R;j++){
+		for(i=1;i<COL-1;i++){
+			for(j=1;j<R-1;j++){
 				fscanf(ptf1,"%d",&Map[i][j]);
 				fscanf(ptf1,"%c",&c);
 			}
@@ -82,9 +83,6 @@ void drawMap(int Map[COL][R]){
 					block=' ';
 					break;
 			}
-		/*	if(block=='*') {
-				 SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),BACKGROUND_INTENSITY|BACKGROUND_RED);
-			}*/
 			printf("%c",block);
 		}
 		printf("\n");
@@ -144,10 +142,10 @@ void BellMan(coord pacman,int Map[COL][R],int Path[COL][R]){
                 prev=dist[i][j];
 				if(Map[i][j])
                     if (i!=pacman.y || j!=pacman.x){
-					a=((i>0) ? dist[i-1][j]:INFINIT);
-					b=((j>0) ? dist[i][j-1]:INFINIT);
-					c=((i<COL-1) ? dist[i+1][j]:INFINIT);
-					d=((j<R-1) ? dist[i][j+1]:INFINIT);
+					a=((i>1) ? dist[i-1][j]:INFINIT);
+					b=((j>1) ? dist[i][j-1]:INFINIT);
+					c=((i<COL-2) ? dist[i+1][j]:INFINIT);
+					d=((j<R-2) ? dist[i][j+1]:INFINIT);
 					dist[i][j]=Min(a,b,c,d)+1;
 				}
 				if(prev!=dist[i][j])
@@ -162,19 +160,19 @@ void BellMan(coord pacman,int Map[COL][R],int Path[COL][R]){
 				n=i;m=j;
 				Path[i][j]=1;
 				while(dist[n][m]!=1){
-				if(n>0&&dist[n-1][m]<dist[n][m]){
+				if(n>1&&dist[n-1][m]<dist[n][m]){
 					Path[n-1][m]=1;
 					n=n-1;
 				}
-				else if(m>0&&dist[n][m-1]<dist[n][m]){
+				else if(m>1&&dist[n][m-1]<dist[n][m]){
 					Path[n][m-1]=1;
 					m=m-1;
 				}
-				else if(n<COL-1&&dist[n+1][m]<dist[n][m]){
+				else if(n<COL-2&&dist[n+1][m]<dist[n][m]){
 					Path[n+1][m]=1;
 					n=n+1;
 				}
-				else if(m<R-1&&dist[n][m+1]<dist[n][m]){
+				else if(m<R-2&&dist[n][m+1]<dist[n][m]){
 					Path[n][m+1]=1;
 					m=m+1;
 				}
@@ -187,9 +185,9 @@ void BellMan(coord pacman,int Map[COL][R],int Path[COL][R]){
 int GPS(int Path[COL][R],coord pacman){
 	int i=pacman.y;
 	int j=pacman.x;
-	if(i<COL-1&&Path[i+1][j]==1) return 2;
-	if(i>0&&Path[i-1][j]==1) return 1;
-	if(j<R-1&&Path[i][j+1]==1) return 4;
-	if(j>0&&Path[i][j-1]==1) return 3;
+	if(i<COL-2&&Path[i+1][j]==1) return 2;
+	if(i>1&&Path[i-1][j]==1) return 1;
+	if(j<R-2&&Path[i][j+1]==1) return 4;
+	if(j>1&&Path[i][j-1]==1) return 3;
 		return 0;
 }
