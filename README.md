@@ -1,2 +1,2 @@
 # first_Phase
-This is the first faze of the pacman project(computer plays (using Bellman Ford algorithm))
+This is the first phase of the pacman project(computer plays (using Bellman Ford algorithm))
