@@ -1,2 +1,3 @@
-# first_Phase
-This is the first phase of the pacman project(computer plays (using Bellman Ford algorithm))
+# first_Phase of pacman project
+This is the first phase of final project of fundamentals of programming
+In this phase, computer plays (using bellman ford algorithm)
